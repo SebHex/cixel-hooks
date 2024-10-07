@@ -21,9 +21,6 @@ importers:
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.0
         version: 8.8.0(@typescript-eslint/parser@8.8.0(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
-      cixel-hooks:
-        specifier: file:dist
-        version: dist@file:dist
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -708,9 +705,6 @@ packages:
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
-
-  dist@file:dist:
-    resolution: {directory: dist, type: directory}
 
   doctrine@3.0.0:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
@@ -2363,8 +2357,6 @@ snapshots:
   dir-glob@3.0.1:
     dependencies:
       path-type: 4.0.0
-
-  dist@file:dist: {}
 
   doctrine@3.0.0:
     dependencies:
