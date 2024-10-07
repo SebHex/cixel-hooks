@@ -1,0 +1,14 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": ["*.js", "*.mjs"],
+      "options": {
+        "semi": true
+      }
+    }
+  ]
+}

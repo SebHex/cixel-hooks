@@ -1,0 +1,48 @@
+{
+  "name": "cixel-hooks",
+  "version": "0.0.1",
+  "description": "A growing collection of React hooks — by the cixel.com.au team",
+  "author": "SebHex",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sebhex/cixel-hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/sebhex/cixel-hooks/issues"
+  },
+  "keywords": [
+    "typescript",
+    "react",
+    "hooks",
+    "cixel"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . && tsc"
+  },
+  "peerDependencies": {
+    "react": "^18"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.27.9",
+    "@types/react": "18.3.11",
+    "@typescript-eslint/eslint-plugin": "8.8.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-jsdoc": "50.3.1",
+    "eslint-plugin-no-relative-import-paths": "1.5.5",
+    "eslint-plugin-perfectionist": "3.8.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-tree-shaking": "1.12.2",
+    "eslint-plugin-unicorn": "56.0.0",
+    "prettier": "3.3.3",
+    "tsup": "8.3.0",
+    "typescript": "5.6.2"
+  }
+}
