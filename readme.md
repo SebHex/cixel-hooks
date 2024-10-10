@@ -4,8 +4,7 @@ A growing collection of custom React hooks, built by [Cixel](https://cixel.com.a
 
 ## Installation
 
-> [!IMPORTANT]
-> This package is not yet published to NPM.
+<pre>npm install <a href="https://www.npmjs.com/package/cixel-hooks">cixel-hooks</a></pre>
 
 ## Usage example
 
