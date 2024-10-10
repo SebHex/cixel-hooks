@@ -23,7 +23,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint . && tsc"
+    "lint": "eslint . && tsc",
+    "release": "pnpm build && changeset publish"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
