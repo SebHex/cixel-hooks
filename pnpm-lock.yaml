@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       react:
-        specifier: ^18
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@changesets/cli':
