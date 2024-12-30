@@ -4,5 +4,10 @@
   "editor.detectIndentation": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
-  "editor.quickSuggestions": { "strings": "on" }
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "cSpell.words": [
+    "cixel"
+  ]
 }
