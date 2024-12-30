@@ -1,12 +1,14 @@
 {
   "name": "cixel-hooks",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A growing collection of React hooks — by the cixel.com.au team",
   "author": "SebHex",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,7 +33,7 @@
     "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.9",
+    "@changesets/cli": "2.27.11",
     "@types/react": "19.0.2",
     "@typescript-eslint/eslint-plugin": "8.8.0",
     "eslint": "8.57.0",
