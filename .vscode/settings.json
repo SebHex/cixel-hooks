@@ -8,6 +8,8 @@
     "strings": "on"
   },
   "cSpell.words": [
-    "cixel"
+    "cixel",
+    "gamepadconnected",
+    "gamepaddisconnected"
   ]
 }
