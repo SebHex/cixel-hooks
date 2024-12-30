@@ -36,7 +36,7 @@ function getQuery(queryOrPreset: string, screens?: Screens): string {
       const presetName = queryOrPreset
       const minBreakpoint = assertValue(
         screens[queryOrPreset],
-        `The breakpoint for the ${presetName} preset does not exist in the screens.`
+        `The breakpoint "${presetName}" does not exist in the screens.`
       )
 
       query = `(min-width: ${minBreakpoint})`
@@ -46,7 +46,7 @@ function getQuery(queryOrPreset: string, screens?: Screens): string {
       const presetName = queryOrPreset.replace('max-', '')
       const maxBreakpoint = assertValue(
         screens[presetName],
-        `The breakpoint for the ${presetName} preset does not exist in the screens.`
+        `The breakpoint "${presetName}" does not exist in the screens.`
       )
 
       query = `(max-width: ${maxBreakpoint})`
@@ -55,7 +55,7 @@ function getQuery(queryOrPreset: string, screens?: Screens): string {
     if (isPresetRange && prefix && suffix) {
       const minBreakpoint = assertValue(
         screens[prefix],
-        `The breakpoint for the ${prefix} preset does not exist in the screens.`
+        `The breakpoint "${prefix}" does not exist in the screens.`
       )
 
       const maxPresetName = suffix.replace('max-', '')
