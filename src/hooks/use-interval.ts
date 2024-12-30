@@ -8,7 +8,7 @@ import { useEffect, useRef } from 'react'
  * @param {number} delay The delay in milliseconds.
  */
 export const useInterval = (callback: VoidFunction, delay?: number): void => {
-  const savedCallback = useRef<VoidFunction>()
+  const savedCallback = useRef<VoidFunction>(null)
 
   // Remember latest callback
   useEffect(() => {

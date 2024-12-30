@@ -1,10 +1,8 @@
-import type { MutableRefObject, RefObject } from 'react'
+import type { RefObject } from 'react'
 import { useEffect } from 'react'
 import { debounce } from '@/utils/debounce'
 
-type Ref = RefObject<EventTarget> | MutableRefObject<EventTarget>
-
-type RefOrTarget = Ref | EventTarget | null
+type RefOrTarget = RefObject<EventTarget | null> | EventTarget | null
 
 type EventType =
   | keyof WindowEventMap
@@ -128,19 +126,19 @@ export const useEventListener: UseEventListener = (...args: Array<any>) => {
       }
     }
 
-    if (!(target && target.addEventListener)) {
+    if (!target?.addEventListener) {
       return
     }
 
     let debounceDelay = 0
 
     if (typeof options === 'object') {
-      const { debounceDelay: delay, ...restOptions } = options
+      const { debounceDelay: delay, ...otherOptions } = options
       debounceDelay = delay || 0
 
       options = {
-        ...restOptions,
-        passive: supportsPassive() && restOptions.passive
+        ...otherOptions,
+        passive: supportsPassive() && otherOptions.passive
       }
     }
 
@@ -163,16 +161,16 @@ function supportsPassive(globalObject: Window = window): boolean {
   let passiveSupported = false
 
   try {
-    const options = {
+    const options: EventListenerOptions = {
       // This function will be called when the browser
       // attempts to access the passive property
       get passive() {
         passiveSupported = true
         return false
       }
-    } as EventListenerOptions
+    }
 
-    const handler = (): void => {}
+    function handler(): void {}
 
     globalObject.document.addEventListener('test', handler, options)
     globalObject.document.removeEventListener('test', handler, options)

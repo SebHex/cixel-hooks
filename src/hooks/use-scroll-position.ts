@@ -1,9 +1,7 @@
-import type { MutableRefObject, RefObject } from 'react'
+import type { RefObject } from 'react'
 import { useEffect, useState } from 'react'
 import { useEventListener } from '@/hooks/use-event-listener'
 import { useMounted } from '@/hooks/use-mounted'
-
-export type Ref = RefObject<Element> | MutableRefObject<Element>
 
 export interface ScrollPosition {
   scrollDirection: 'up' | 'right' | 'down' | 'left'
@@ -48,11 +46,14 @@ export interface UseScrollPosition {
    * const ref = useRef<HTMLDivElement>(null)
    * const scrollPosition = useScrollPosition(ref, options)
    */
-  (ref: Ref, options?: ScrollPositionOptions): ScrollPosition
+  (
+    ref: RefObject<Element | null>,
+    options?: ScrollPositionOptions
+  ): ScrollPosition
 }
 
 export const useScrollPosition: UseScrollPosition = (
-  arg1?: ScrollPositionOptions | Ref,
+  arg1?: ScrollPositionOptions | RefObject<Element | null>,
   arg2?: ScrollPositionOptions
 ) => {
   const [prevScrollX, setPrevScrollX] = useState(0)

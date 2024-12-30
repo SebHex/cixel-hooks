@@ -9,7 +9,9 @@ import { useImperativeHandle, useRef } from 'react'
  * @param {Ref<T>} forwardedRef The forwarded ref.
  * @returns {RefObject<T>} The merged ref.
  */
-export function useMergedRef<T>(forwardedRef: Ref<T>): RefObject<T> {
+export function useMergedRef<T>(
+  forwardedRef: Ref<T | null>
+): RefObject<T | null> {
   const localRef = useRef<T>(null)
   useImperativeHandle(forwardedRef, () => localRef.current!)
 

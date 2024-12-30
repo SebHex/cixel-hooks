@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.27.9",
-    "@types/react": "18.3.11",
+    "@types/react": "19.0.2",
     "@typescript-eslint/eslint-plugin": "8.8.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
@@ -40,7 +40,7 @@
     "eslint-plugin-no-relative-import-paths": "1.5.5",
     "eslint-plugin-perfectionist": "3.8.0",
     "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-react-hooks": "5.1.0",
     "eslint-plugin-tree-shaking": "1.12.2",
     "eslint-plugin-unicorn": "56.0.0",
     "prettier": "3.3.3",
