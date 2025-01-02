@@ -1,14 +1,14 @@
 name: Publish
 on:
   workflow_run:
-    workflows: [CI]
+    workflows: ["Lint and build"]
     branches: [main]
     types: [completed]
 
 env:
   NODE_VERSION: 20
   PNPM_VERSION: 9
-  
+
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
