@@ -23,6 +23,7 @@ function Component() {
 
 - [useCallbackOnce](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-callback-once.ts)
 - [useCopyToClipboard](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-copy-to-clipboard.ts)
+- [useDelayedTouchEventListener](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-delayed-touch-event-listener.ts)
 - [useEffectOnce](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-effect-once.ts)
 - [useEventListener](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-event-listener.ts)
 - [useInView](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-in-view.ts)
