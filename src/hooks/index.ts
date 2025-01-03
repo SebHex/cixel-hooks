@@ -1,5 +1,6 @@
 export * from './use-callback-once'
 export * from './use-copy-to-clipboard'
+export * from './use-delayed-touch-event-listener'
 export * from './use-effect-once'
 export * from './use-event-listener'
 export * from './use-in-view'
