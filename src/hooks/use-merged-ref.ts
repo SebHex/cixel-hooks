@@ -6,14 +6,14 @@ import { useImperativeHandle, useRef } from 'react'
  * ref within a component.
  *
  * @template T The type of the ref.
- * @param {Ref<T>} forwardedRef The forwarded ref.
- * @returns {RefObject<T>} The merged ref.
+ * @param {Ref<T | null> | undefined} forwardedRef The forwarded ref.
+ * @returns {RefObject<T | null>} The merged ref.
  */
 export function useMergedRef<T>(
-  forwardedRef: Ref<T | null>
+  forwardedRef: Ref<T | null> | undefined
 ): RefObject<T | null> {
-  const localRef = useRef<T>(null)
-  useImperativeHandle(forwardedRef, () => localRef.current!)
+  const mergedRef = useRef<T>(null)
+  useImperativeHandle(forwardedRef, () => mergedRef.current!)
 
-  return localRef
+  return mergedRef
 }
