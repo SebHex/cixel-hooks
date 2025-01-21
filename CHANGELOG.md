@@ -1,5 +1,11 @@
 # cixel-hooks
 
+## 0.2.2
+
+### Patch Changes
+
+- 04b3fb2: Fix useMergedRef types
+
 ## 0.2.1
 
 ### Patch Changes
