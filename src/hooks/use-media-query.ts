@@ -76,6 +76,14 @@ function getMatches(query: string): boolean {
   return windowExists && window.matchMedia(query).matches
 }
 
+const defaultScreens: Screens = {
+  sm: '40rem',
+  md: '48rem',
+  lg: '64rem',
+  xl: '80rem',
+  '2xl': '96rem'
+}
+
 /**
  * Use a media query to determine if the viewport matches the query.
  *
@@ -86,7 +94,7 @@ function getMatches(query: string): boolean {
  */
 export function useMediaQuery(
   queryOrPreset: string,
-  screens?: Screens
+  screens: Screens = defaultScreens
 ): boolean {
   const query = getQuery(queryOrPreset, screens)
   const [matches, setMatches] = useState(getMatches(query))
