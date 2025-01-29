@@ -1,5 +1,11 @@
 # cixel-hooks
 
+## 0.3.0
+
+### Minor Changes
+
+- 1c8fa63: Add useMediaQuery default screens
+
 ## 0.2.2
 
 ### Patch Changes
