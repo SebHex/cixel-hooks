@@ -30,6 +30,7 @@ function Component() {
 - [useInterval](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-interval.ts)
 - [useMediaQuery](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-media-query.ts)
 - [useMergedRef](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-merged-ref.ts)
+- [usePrevious](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-previous.ts)
 - [useMounted](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-mounted.ts)
 - [useScrollPosition](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-scroll-position.ts)
 - [useTimeUnitInterval](https://github.com/SebHex/cixel-hooks/blob/main/src/hooks/use-time-unit-interval.ts)
