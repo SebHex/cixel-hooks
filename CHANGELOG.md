@@ -1,5 +1,11 @@
 # cixel-hooks
 
+## 0.4.0
+
+### Minor Changes
+
+- ede5d8e: Add usePrevious hook
+
 ## 0.3.0
 
 ### Minor Changes
