@@ -1,6 +1,6 @@
 {
   "name": "cixel-hooks",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A growing collection of React hooks — by the cixel.com.au team",
   "author": "SebHex",
   "main": "dist/index.js",

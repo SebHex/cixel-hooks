@@ -1,5 +1,11 @@
 # cixel-hooks
 
+## 0.5.0
+
+### Minor Changes
+
+- cbab04c: Improve performance and UX
+
 ## 0.4.0
 
 ### Minor Changes
