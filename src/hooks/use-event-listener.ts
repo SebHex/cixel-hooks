@@ -1,5 +1,5 @@
 import type { RefObject } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { debounce } from '@/utils/debounce'
 
 type RefOrTarget = RefObject<EventTarget | null> | EventTarget | null
@@ -101,24 +101,45 @@ const windowSpecificEvents = [
   'unload'
 ]
 
+interface ExtractedEventListenerArgs {
+  eventType: EventType
+  handler: EventListenerOrEventListenerObject
+  options: EventListenerOptions | boolean
+  refOrTarget: RefOrTarget
+  refOrTargetOmitted: boolean
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function extractArgs(args: Array<any>): ExtractedEventListenerArgs {
+  const refOrTargetOmitted = typeof args[0] === 'string'
+
+  return {
+    refOrTargetOmitted,
+    eventType: refOrTargetOmitted ? args[0] : args[1],
+    handler: refOrTargetOmitted ? args[1] : args[2],
+    options: refOrTargetOmitted ? args[2] : args[3],
+    refOrTarget: refOrTargetOmitted ? null : args[0]
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useEventListener: UseEventListener = (...args: Array<any>) => {
+  const { refOrTargetOmitted, eventType, handler, options, refOrTarget } =
+    extractArgs(args)
+  const savedHandlerRef = useRef(handler)
+
   useEffect(() => {
-    let refOrTarget: RefOrTarget
-    let type: EventType
-    let handler: EventListenerOrEventListenerObject
-    let options: EventListenerOptions | boolean
+    savedHandlerRef.current = handler
+  }, [handler])
+
+  useEffect(() => {
+    const type: EventType = eventType
     let target: EventTarget | null
 
-    const refOrTargetOmitted = typeof args[0] === 'string'
-
     if (refOrTargetOmitted) {
-      ;[type, handler, options] = args
       const isWindowSpecificEvent = windowSpecificEvents.includes(type)
       target = isWindowSpecificEvent ? window : document
     } else {
-      ;[refOrTarget, type, handler, options] = args
-
       if (refOrTarget && 'current' in refOrTarget) {
         target = refOrTarget.current
       } else {
@@ -130,53 +151,29 @@ export const useEventListener: UseEventListener = (...args: Array<any>) => {
       return
     }
 
+    let optionsToUse = options
     let debounceDelay = 0
 
-    if (typeof options === 'object') {
-      const { debounceDelay: delay, ...otherOptions } = options
+    if (typeof optionsToUse === 'object') {
+      const { debounceDelay: delay, ...otherOptions } = optionsToUse
       debounceDelay = delay || 0
-
-      options = {
-        ...otherOptions,
-        passive: supportsPassive() && otherOptions.passive
-      }
+      optionsToUse = otherOptions
     }
 
-    if (debounceDelay > 0) {
-      if ('handleEvent' in handler) {
-        const originalHandler = handler.handleEvent.bind(handler)
-        handler.handleEvent = debounce(originalHandler, debounceDelay)
+    function listener(event: Event): void {
+      const currentHandler = savedHandlerRef.current
+      if ('handleEvent' in currentHandler) {
+        currentHandler.handleEvent(event)
       } else {
-        handler = debounce(handler, debounceDelay)
+        currentHandler(event)
       }
     }
 
-    target.addEventListener(type, handler, options)
+    const eventListener =
+      debounceDelay > 0 ? debounce(listener, debounceDelay) : listener
 
-    return () => target.removeEventListener(type, handler, options)
-  }, [args])
-}
+    target.addEventListener(type, eventListener, optionsToUse)
 
-function supportsPassive(globalObject: Window = window): boolean {
-  let passiveSupported = false
-
-  try {
-    const options: EventListenerOptions = {
-      // This function will be called when the browser
-      // attempts to access the passive property
-      get passive() {
-        passiveSupported = true
-        return false
-      }
-    }
-
-    function handler(): void {}
-
-    globalObject.document.addEventListener('test', handler, options)
-    globalObject.document.removeEventListener('test', handler, options)
-  } catch {
-    passiveSupported = false
-  }
-
-  return passiveSupported
+    return () => target.removeEventListener(type, eventListener, optionsToUse)
+  }, [eventType, options, refOrTarget, refOrTargetOmitted])
 }
