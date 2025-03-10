@@ -94,7 +94,6 @@
       "rules": {
         "object-shorthand": "warn",
         "prefer-arrow-callback": "warn",
-        "unicorn/no-null": "warn",
         "unicorn/no-for-loop": "warn",
         "unicorn/no-array-for-each": "warn",
         "unicorn/prefer-switch": "warn",

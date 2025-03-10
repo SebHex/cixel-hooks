@@ -75,7 +75,6 @@ export const useScrollPosition: UseScrollPosition = (
   const refOmitted = !arg1 || !('current' in arg1)
 
   if (refOmitted) {
-    // eslint-disable-next-line unicorn/no-null
     eventTarget = isMounted ? window : null
     scrollTargetIsBody = true
     options = arg1 || {}
