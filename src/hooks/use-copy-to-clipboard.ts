@@ -1,23 +1,27 @@
-import { useState } from 'react'
-import { useCallbackOnce } from '@/hooks/use-callback-once'
+import { useRef, useState } from 'react'
 
-export type CopyFunction = (text: string) => Promise<boolean>
-
-export type CopiedText = string | undefined
-
-export type UseCopyToClipboardResult = [CopyFunction, CopiedText]
+export interface UseCopyToClipboardResult {
+  copy: (text: string) => Promise<boolean>
+  copiedText: string | undefined
+  copied: boolean
+}
 
 /**
  * Use to copy text to the clipboard with the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
  *
- * @returns {UseCopyToClipboardResult} A tuple containing the copy function
- *  and the copied text. The copy function returns a promise that resolves to
- * `true` if the text was copied.
+ * @param {number} copiedDuration The duration in milliseconds to show the
+ *  copied state. Default is 2000ms.
+ * @returns {UseCopyToClipboardResult} The copy function, the copied text and
+ *  the copied state.
  */
-export function useCopyToClipboard(): UseCopyToClipboardResult {
-  const [copiedText, setCopiedText] = useState<CopiedText>()
+export function useCopyToClipboard(
+  copiedDuration: number = 2000
+): UseCopyToClipboardResult {
+  const [copiedText, setCopiedText] = useState<string>()
+  const [copied, setCopied] = useState(false)
+  const copiedTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined)
 
-  const secureCopy = async (text: string): Promise<boolean> => {
+  async function secureCopy(text: string): Promise<boolean> {
     try {
       await navigator.clipboard.writeText(text)
       setCopiedText(text)
@@ -29,7 +33,7 @@ export function useCopyToClipboard(): UseCopyToClipboardResult {
     }
   }
 
-  const unsecureCopy = (text: string): true => {
+  function unsecureCopy(text: string): true {
     const textArea = document.createElement('textarea')
     textArea.value = text
     textArea.style.position = 'absolute'
@@ -42,15 +46,27 @@ export function useCopyToClipboard(): UseCopyToClipboardResult {
     return true
   }
 
-  const copyFunction: CopyFunction = useCallbackOnce(async (text) => {
+  async function copy(text: string): Promise<boolean> {
     const secureCopyAvailable = window.isSecureContext && navigator.clipboard
+    let result: boolean
 
     if (secureCopyAvailable) {
-      return await secureCopy(text)
+      result = await secureCopy(text)
     } else {
-      return unsecureCopy(text)
+      result = unsecureCopy(text)
     }
-  })
 
-  return [copyFunction, copiedText]
+    if (result) {
+      setCopied(true)
+      clearTimeout(copiedTimeoutRef.current)
+      copiedTimeoutRef.current = setTimeout(
+        () => setCopied(false),
+        copiedDuration
+      )
+    }
+
+    return result
+  }
+
+  return { copy, copiedText, copied }
 }
